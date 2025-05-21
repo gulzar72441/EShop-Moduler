@@ -2,7 +2,9 @@
 
 **eshop-moduler** is a modern backend project showcasing how to build a **Modular Monolith** using **.NET 8**, combining principles like **DDD**, **CQRS**, **Vertical Slice Architecture**, and **Outbox Pattern** with cloud-native backing services.
 
-![Sample Image](https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-cf14-61f7-b19c-4f374fe3496d/raw?se=2025-05-21T11%3A11%3A18Z&sp=r&sv=2024-08-04&sr=b&scid=24a95671-bc21-5e1b-8c56-103be464cc7d&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-20T22%3A32%3A44Z&ske=2025-05-21T22%3A32%3A44Z&sks=b&skv=2024-08-04&sig=tAk48GrOcY461GDpK5Co198uZcoln/bHt9CyEHoYLDY%3D)
+<img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-cf14-61f7-b19c-4f374fe3496d/raw?se=2025-05-21T11%3A11%3A18Z&sp=r&sv=2024-08-04&sr=b&scid=24a95671-bc21-5e1b-8c56-103be464cc7d&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-20T22%3A32%3A44Z&ske=2025-05-21T22%3A32%3A44Z&sks=b&skv=2024-08-04&sig=tAk48GrOcY461GDpK5Co198uZcoln/bHt9CyEHoYLDY%3D" alt="Sample Image" width="400"/>
+ 
+ 
 ---
 
 ## 📦 Modules
