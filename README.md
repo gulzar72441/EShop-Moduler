@@ -46,6 +46,30 @@
 ### ⚙️ Setup Instructions
 
 1. Clone the repository:
-   ```bash
    git clone https://github.com/gulzar72441/EShop-Moduler.git
    cd eshop-moduler
+Start Docker Desktop and ensure:
+
+Memory: 4 GB
+
+CPUs: 2
+
+Run the solution:
+
+Set docker-compose as the startup project in Visual Studio
+
+Or run via CLI:
+
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+Wait for all containers to initialize.
+
+🔍 API Testing
+Base URL: https://localhost:6060
+
+Use the provided Postman collection to test all internal module APIs.
+
+🔄 Migration Ready
+This project is structured to support smooth transition from Modular Monolith to Microservices using the Strangler Fig Pattern.
+
+👨‍💻 Author
+Gulzar Ahmad Bilal
