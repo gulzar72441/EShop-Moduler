@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "aRAT69hQfr8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\vaival\\Downloads\\EshopModularMonoliths-main\\EshopModularMonoliths-main\\src\\Modules\\Catalog\\Catalog.Contracts\\Catalog.Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vaival\\.nuget\\packages\\mediatr\\12.4.0\\mediatr.12.4.0.nupkg.sha512",
+    "C:\\Users\\vaival\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\vaival\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

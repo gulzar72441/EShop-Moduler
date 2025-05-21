@@ -1,0 +1,166 @@
+name: dockercompose16310107840315828128
+services:
+  api:
+    build:
+      context: C:\Users\vaival\Downloads\EshopModularMonoliths-main\EshopModularMonoliths-main\src
+      dockerfile: Bootstrapper/Api/Dockerfile
+    depends_on:
+      distributedcache:
+        condition: service_started
+        required: true
+      eshopdb:
+        condition: service_started
+        required: true
+      identity:
+        condition: service_started
+        required: true
+      messagebus:
+        condition: service_started
+        required: true
+      seq:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__Database: Server=eshopdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true
+      ConnectionStrings__Redis: distributedcache:6379
+      Keycloak__AuthServerUrl: http://identity:9090/
+      MessageBroker__Host: amqp://ecommerce-mq:5672
+      MessageBroker__Password: guest
+      MessageBroker__UserName: guest
+      Serilog__Enrich__0: FromLogContext
+      Serilog__Enrich__1: WithMachineName
+      Serilog__Enrich__2: WithProcessId
+      Serilog__Enrich__3: WithThreadId
+      Serilog__MinimumLevel__Default: Information
+      Serilog__MinimumLevel__Override__Microsoft: Information
+      Serilog__MinimumLevel__Override__System: Warning
+      Serilog__Properties__Application: EShop ASP.NET Core App
+      Serilog__Properties__Environment: Development
+      Serilog__Using__0: Serilog.Sinks.Console
+      Serilog__Using__1: Serilog.Sinks.Seq
+      Serilog__WriteTo__0__Name: Console
+      Serilog__WriteTo__1__Args__serverUrl: http://seq:5341
+      Serilog__WriteTo__1__Name: Seq
+    image: api
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "6000"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "6060"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\vaival\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\vaival\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  distributedcache:
+    container_name: distributedcache
+    image: redis
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 6379
+        published: "6379"
+        protocol: tcp
+    restart: always
+  eshopdb:
+    container_name: eshopdb
+    environment:
+      POSTGRES_DB: EShopDb
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    image: postgres
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: postgres_eshopdb
+        target: /var/lib/postgresql/data
+        volume: {}
+  identity:
+    command:
+      - start-dev
+    container_name: identity
+    environment:
+      KC_DB: postgres
+      KC_DB_PASSWORD: postgres
+      KC_DB_URL: jdbc:postgresql://eshopdb/EShopDb?currentSchema=identity
+      KC_DB_USERNAME: postgres
+      KC_HOSTNAME: http://identity:9090/
+      KC_HTTP_PORT: "9090"
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    image: quay.io/keycloak/keycloak:24.0.3
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 9090
+        published: "9090"
+        protocol: tcp
+    restart: always
+  messagebus:
+    container_name: messagebus
+    environment:
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: guest
+    hostname: ecommerce-mq
+    image: rabbitmq:management
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5672
+        published: "5672"
+        protocol: tcp
+      - mode: ingress
+        target: 15672
+        published: "15672"
+        protocol: tcp
+    restart: always
+  seq:
+    container_name: seq
+    environment:
+      ACCEPT_EULA: "Y"
+    image: datalust/seq:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5341
+        published: "5341"
+        protocol: tcp
+      - mode: ingress
+        target: 80
+        published: "9091"
+        protocol: tcp
+    restart: always
+networks:
+  default:
+    name: dockercompose16310107840315828128_default
+volumes:
+  postgres_eshopdb:
+    name: dockercompose16310107840315828128_postgres_eshopdb
